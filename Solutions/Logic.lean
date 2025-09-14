@@ -54,8 +54,12 @@ theorem disj_comm :
 
 theorem conj_comm :
   (P ∧ Q) → (Q ∧ P)  := by
-  sorry
-
+  intro hpeq
+  constructor
+  . have hq : Q := hpeq.right
+    exact hq
+  . have hp : P := hpeq.left
+    exact hp
 
 ------------------------------------------------
 -- Interdefinability of →,∨
