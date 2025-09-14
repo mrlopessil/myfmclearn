@@ -25,7 +25,15 @@ theorem doubleneg_elim :
 
 theorem doubleneg_law :
   ¬ ¬ P ↔ P  := by
-  sorry
+  constructor
+  . intro hnnp -- Lado-L
+    by_cases h : P
+    . exact h
+    . exfalso
+      exact hnnp h
+  . intro hp -- Lado-R
+    intro hnp
+    exact hnp hp
 
 
 ------------------------------------------------
