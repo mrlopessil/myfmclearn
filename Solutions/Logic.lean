@@ -42,7 +42,15 @@ theorem doubleneg_law :
 
 theorem disj_comm :
   (P ∨ Q) → (Q ∨ P)  := by
-  sorry
+  intro hor
+  cases hor with
+  | inl hp =>
+    right
+    exact hp
+  | inr hq =>
+    left
+    exact hq
+
 
 theorem conj_comm :
   (P ∧ Q) → (Q ∧ P)  := by
