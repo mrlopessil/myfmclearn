@@ -16,7 +16,12 @@ theorem doubleneg_intro :
 
 theorem doubleneg_elim :
   ¬ ¬ P → P  := by
-  sorry
+  intro hnnp
+  by_cases h : P
+  . exact h
+  . exfalso
+    apply hnnp
+    exact h
 
 theorem doubleneg_law :
   ¬ ¬ P ↔ P  := by
