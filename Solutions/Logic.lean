@@ -71,7 +71,14 @@ theorem impl_as_disj_converse :
 
 theorem disj_as_impl :
   (P ∨ Q) → (¬ P → Q)  := by
-  sorry
+  intro hporq
+  intro hnp
+  cases hporq with
+  | inl hp =>
+    exfalso
+    exact hnp hp
+  | inr hq =>
+    exact hq
 
 
 ------------------------------------------------
