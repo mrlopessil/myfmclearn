@@ -135,7 +135,13 @@ theorem contrapositive_law :
 
 theorem lem_irrefutable :
   ¬ ¬ (P ∨ ¬ P)  := by
-  sorry
+  intro h
+  have hnp : ¬P := by
+    intro hp
+    have hpnp : P ∨ ¬P := Or.inl hp
+    exact h hpnp
+  have hpnp : P ∨ ¬P := Or.inr hnp
+  exact h hpnp
 
 
 ------------------------------------------------
