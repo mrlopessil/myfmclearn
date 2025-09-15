@@ -95,7 +95,11 @@ theorem disj_as_impl :
 
 theorem impl_as_contrapositive :
   (P → Q) → (¬ Q → ¬ P)  := by
-  sorry
+  intro hpq
+  intro hnq
+  intro hp
+  have hq : Q := hpq hp
+  exact hnq hq
 
 theorem impl_as_contrapositive_converse :
   (¬ Q → ¬ P) → (P → Q)  := by
