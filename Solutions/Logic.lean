@@ -67,7 +67,15 @@ theorem conj_comm :
 
 theorem impl_as_disj_converse :
   (¬ P ∨ Q) → (P → Q)  := by
-  sorry
+  intro hnporq
+  intro hp
+  cases hnporq with
+  | inl hpc =>
+    exfalso
+    exact hpc hp
+  | inr hq =>
+    exact hq
+
 
 theorem disj_as_impl :
   (P ∨ Q) → (¬ P → Q)  := by
