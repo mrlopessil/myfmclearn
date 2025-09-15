@@ -150,7 +150,14 @@ theorem lem_irrefutable :
 
 theorem peirce_law_weak :
   ((P → Q) → P) → ¬ ¬ P  := by
-  sorry
+  intro hpqp
+  intro hnp
+  have hpq : P → Q := by
+    intro hp
+    exfalso
+    exact hnp hp
+  have hp : P := hpqp hpq
+  exact hnp hp
 
 
 ------------------------------------------------
