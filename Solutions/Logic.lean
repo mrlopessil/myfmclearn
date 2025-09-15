@@ -114,7 +114,19 @@ theorem impl_as_contrapositive_converse :
 
 theorem contrapositive_law :
   (P → Q) ↔ (¬ Q → ¬ P)  := by
-  sorry
+  constructor
+  . intro hpq
+    intro hnq
+    intro hp
+    have hq : Q := hpq hp
+    exact hnq hq
+  . intro hnqnp
+    intro hp
+    by_cases hnq : Q
+    . exact hnq
+    . exfalso
+      have hnp : ¬P := hnqnp hnq
+      exact hnp hp
 
 
 ------------------------------------------------
