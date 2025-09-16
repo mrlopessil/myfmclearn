@@ -182,7 +182,16 @@ theorem impl_linear :
 
 theorem disj_as_negconj :
   P ∨ Q → ¬ (¬ P ∧ ¬ Q)  := by
-  sorry
+  intro hporq
+  intro hnpnq
+  have hnq : ¬Q := hnpnq.right
+  have hnp : ¬P := hnpnq.left
+
+  cases hporq with
+  | inl hp =>
+    exact hnp hp
+  | inr hq =>
+    exact hnq hq
 
 theorem conj_as_negdisj :
   P ∧ Q → ¬ (¬ P ∨ ¬ Q)  := by
