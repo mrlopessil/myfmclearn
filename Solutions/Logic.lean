@@ -195,8 +195,16 @@ theorem disj_as_negconj :
 
 theorem conj_as_negdisj :
   P ∧ Q → ¬ (¬ P ∨ ¬ Q)  := by
-  sorry
+  intro hpeq
+  intro hnpnp
+  have hp : P := hpeq.left
+  have hq : Q := hpeq.right
 
+  cases hnpnp with
+  | inl hnp =>
+    exact hnp hp
+  | inr hnq =>
+    exact hnq hq
 
 ------------------------------------------------
 -- De Morgan laws for ∨,∧
