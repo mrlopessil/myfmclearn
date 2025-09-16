@@ -212,7 +212,14 @@ theorem conj_as_negdisj :
 
 theorem demorgan_disj :
   ¬ (P ∨ Q) → (¬ P ∧ ¬ Q)  := by
-  sorry
+  intro hnpq
+  constructor
+  . intro hp
+    apply hnpq
+    exact Or.inl hp
+  . intro hq
+    apply hnpq
+    exact Or.inr hq
 
 theorem demorgan_disj_converse :
   (¬ P ∧ ¬ Q) → ¬ (P ∨ Q)  := by
