@@ -223,7 +223,16 @@ theorem demorgan_disj :
 
 theorem demorgan_disj_converse :
   (¬ P ∧ ¬ Q) → ¬ (P ∨ Q)  := by
-  sorry
+  intro hnpenq
+  intro hpeq
+  have hnp : ¬P := hnpenq.left
+  have hnq : ¬Q := hnpenq.right
+
+  cases hpeq with
+  | inl hp =>
+    exact hnp hp
+  | inr hq =>
+    exact hnq hq
 
 theorem demorgan_conj :
   ¬ (P ∧ Q) → (¬ Q ∨ ¬ P)  := by
