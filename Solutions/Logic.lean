@@ -236,7 +236,15 @@ theorem demorgan_disj_converse :
 
 theorem demorgan_conj :
   ¬ (P ∧ Q) → (¬ Q ∨ ¬ P)  := by
-  sorry
+  intro hnporq
+  by_cases hq : Q
+  . by_cases hp : P
+    . exfalso
+      exact hnporq ⟨hp, hq⟩
+    . right
+      exact hp
+  . left
+    exact hq
 
 theorem demorgan_conj_converse :
   (¬ Q ∨ ¬ P) → ¬ (P ∧ Q)  := by
