@@ -314,11 +314,39 @@ theorem demorgan_disj_law :
 
 theorem distr_conj_disj :
   P ∧ (Q ∨ R) → (P ∧ Q) ∨ (P ∧ R)  := by
-  sorry
+  intro h
+  have hp : P := h.left
+  have hqorr := h.right
+  cases hqorr with
+  | inl hq =>
+    left
+    constructor
+    . exact hp
+    . exact hq
+  | inr hr =>
+    right
+    constructor
+    . exact hp
+    . exact hr
 
 theorem distr_conj_disj_converse :
   (P ∧ Q) ∨ (P ∧ R) → P ∧ (Q ∨ R)  := by
-  sorry
+  intro h
+  cases h with
+  | inl hpq =>
+    constructor
+    . have hp := hpq.left
+      exact hp
+    . left
+      have hq := hpq.right
+      exact hq
+  | inr hpr =>
+    constructor
+    . have hp := hpr.left
+      exact hp
+    . right
+      have hr := hpr.right
+      exact hr
 
 theorem distr_disj_conj :
   P ∨ (Q ∧ R) → (P ∨ Q) ∧ (P ∨ R)  := by
