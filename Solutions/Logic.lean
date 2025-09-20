@@ -429,19 +429,27 @@ theorem impl_refl :
 
 theorem weaken_disj_right :
   P → (P ∨ Q)  := by
-  sorry
+  intro hp
+  left
+  exact hp
 
 theorem weaken_disj_left :
   Q → (P ∨ Q)  := by
-  sorry
+  intro hq
+  right
+  exact hq
 
 theorem weaken_conj_right :
   (P ∧ Q) → P  := by
-  sorry
+  intro hpq
+  have hp := hpq.left
+  exact hp
 
 theorem weaken_conj_left :
   (P ∧ Q) → Q  := by
-  sorry
+  intro hpq
+  have hq := hpq.right
+  exact hq
 
 
 ------------------------------------------------
