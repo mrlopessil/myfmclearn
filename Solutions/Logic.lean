@@ -458,11 +458,27 @@ theorem weaken_conj_left :
 
 theorem disj_idem :
   (P ∨ P) ↔ P  := by
-  sorry
+  constructor
+  . intro hpp
+    cases hpp with
+    | inl hp =>
+      exact hp
+    | inr hp =>
+      exact hp
+  . intro hp
+    left
+    exact hp
 
 theorem conj_idem :
   (P ∧ P) ↔ P := by
-  sorry
+  constructor
+  . intro hpp
+    have hp := hpp.left
+    exact hp
+  . intro hp
+    constructor
+    . exact hp
+    . exact hp
 
 
 ------------------------------------------------
