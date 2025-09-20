@@ -350,11 +350,44 @@ theorem distr_conj_disj_converse :
 
 theorem distr_disj_conj :
   P ∨ (Q ∧ R) → (P ∨ Q) ∧ (P ∨ R)  := by
-  sorry
+  intro h
+  constructor
+  . cases h with
+    | inl hp =>
+      left
+      exact hp
+    | inr hqr =>
+      have hq := hqr.left
+      right
+      exact hq
+  . cases h with
+    | inl hp =>
+      left
+      exact hp
+    | inr hqr =>
+      right
+      have hr := hqr.right
+      exact hr
 
 theorem distr_disj_conj_converse :
   (P ∨ Q) ∧ (P ∨ R) → P ∨ (Q ∧ R)  := by
-  sorry
+  intro h
+  have hpq := h.left
+  have hpr := h.right
+  cases hpq with
+  | inl hp =>
+    left
+    exact hp
+  | inr hq =>
+    cases hpr with
+    | inl hp =>
+      left
+      exact hp
+    | inr hr =>
+      right
+      constructor
+      . exact hq
+      . exact hr
 
 
 ------------------------------------------------
