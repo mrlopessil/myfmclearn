@@ -520,19 +520,53 @@ theorem demorgan_exists :
 
 theorem demorgan_exists_converse :
   (∀ x, ¬ P x) → ¬ (∃ x, P x)  := by
-  sorry
+  intro hu
+  intro he
+  rcases he with ⟨x, hpx⟩
+  have hnpx : ¬ P x := hu x
+  exact hnpx hpx
 
 theorem demorgan_forall :
   ¬ (∀ x, P x) → (∃ x, ¬ P x)  := by
-  sorry
+  intro h
+  by_cases he : ∃ x, ¬ P x
+  . exact he
+  . exfalso
+    apply h
+    intro x
+    by_cases hpx : P x
+    . exact hpx
+    . exfalso
+      apply he
+      exact ⟨x, hpx⟩
 
 theorem demorgan_forall_converse :
   (∃ x, ¬ P x) → ¬ (∀ x, P x)  := by
-  sorry
+  intro he
+  rcases he with ⟨x, hnpx⟩
+  intro hu
+  have hpx : P x := hu x
+  exact hnpx hpx
 
 theorem demorgan_forall_law :
   ¬ (∀ x, P x) ↔ (∃ x, ¬ P x)  := by
-  sorry
+  constructor
+  . intro h
+    by_cases he : ∃ x, ¬ P x
+    . exact he
+    . exfalso
+      apply h
+      intro x
+      by_cases hpx : P x
+      . exact hpx
+      . exfalso
+        apply he
+        exact ⟨x, hpx⟩
+  . intro he
+    rcases he with ⟨x, hnpx⟩
+    intro hu
+    have hpx : P x := hu x
+    exact hnpx hpx
 
 theorem demorgan_exists_law :
   ¬ (∃ x, P x) ↔ (∀ x, ¬ P x)  := by
