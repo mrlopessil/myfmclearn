@@ -589,27 +589,79 @@ theorem demorgan_exists_law :
 
 theorem exists_as_neg_forall :
   (∃ x, P x) → ¬ (∀ x, ¬ P x)  := by
-  sorry
+  intro he
+  intro hu
+  rcases he with ⟨x, hpx⟩
+  apply hu x
+  exact hpx
 
 theorem forall_as_neg_exists :
   (∀ x, P x) → ¬ (∃ x, ¬ P x)  := by
-  sorry
+  intro hu
+  intro he
+  rcases he with ⟨x, hnpx⟩
+  apply hnpx
+  apply hu x
 
 theorem forall_as_neg_exists_converse :
   ¬ (∃ x, ¬ P x) → (∀ x, P x)  := by
-  sorry
+  intro hne
+  intro x
+  by_cases hpx : P x
+  . exact hpx
+  . exfalso
+    apply hne
+    exact ⟨x, hpx⟩
 
 theorem exists_as_neg_forall_converse :
   ¬ (∀ x, ¬ P x) → (∃ x, P x)  := by
-  sorry
+  intro hu
+  by_cases he : ∃ x, P x
+  . exact he
+  . exfalso
+    apply hu
+    intro x
+    by_cases hpx : P x
+    . exfalso
+      apply he
+      exact ⟨x, hpx⟩
+    . exact hpx
 
 theorem forall_as_neg_exists_law :
   (∀ x, P x) ↔ ¬ (∃ x, ¬ P x)  := by
-  sorry
+  constructor
+  . intro hu
+    intro he
+    rcases he with ⟨x, hnpx⟩
+    apply hnpx
+    apply hu x
+  . intro hne
+    intro x
+    by_cases hpx : P x
+    . exact hpx
+    . exfalso
+      apply hne
+      exact ⟨x, hpx⟩
 
 theorem exists_as_neg_forall_law :
   (∃ x, P x) ↔ ¬ (∀ x, ¬ P x)  := by
-  sorry
+  constructor
+  . intro he
+    intro hu
+    rcases he with ⟨x, hpx⟩
+    apply hu x
+    exact hpx
+  . intro hu
+    by_cases he : ∃ x, P x
+    . exact he
+    . exfalso
+      apply hu
+      intro x
+      by_cases hpx : P x
+      . exfalso
+        apply he
+        exact ⟨x, hpx⟩
+      . exact hpx
 
 
 ------------------------------------------------
