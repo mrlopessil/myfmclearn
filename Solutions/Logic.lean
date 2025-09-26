@@ -570,7 +570,17 @@ theorem demorgan_forall_law :
 
 theorem demorgan_exists_law :
   ¬ (∃ x, P x) ↔ (∀ x, ¬ P x)  := by
-  sorry
+  constructor
+  . intro hne
+    intro x
+    intro hpx
+    apply hne
+    exact ⟨x, hpx⟩
+  . intro hu
+    intro he
+    rcases he with ⟨x, hpx⟩
+    apply hu x
+    exact hpx
 
 
 ------------------------------------------------
