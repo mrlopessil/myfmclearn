@@ -670,27 +670,66 @@ theorem exists_as_neg_forall_law :
 
 theorem exists_conj_as_conj_exists :
   (∃ x, P x ∧ Q x) → (∃ x, P x) ∧ (∃ x, Q x)  := by
-  sorry
+  intro h
+  constructor
+  . rcases h with ⟨x, hpx, hqx⟩
+    exact ⟨x, hpx⟩
+  . rcases h with ⟨x, hpx, hqx⟩
+    exact ⟨x, hqx⟩
 
 theorem exists_disj_as_disj_exists :
   (∃ x, P x ∨ Q x) → (∃ x, P x) ∨ (∃ x, Q x)  := by
-  sorry
+  intro h
+  rcases h with ⟨x, hpqx⟩
+  cases hpqx with
+  | inl hpx =>
+    left
+    exact ⟨x, hpx⟩
+  | inr hqx =>
+    right
+    exact ⟨x, hqx⟩
 
 theorem exists_disj_as_disj_exists_converse :
   (∃ x, P x) ∨ (∃ x, Q x) → (∃ x, P x ∨ Q x)  := by
-  sorry
+  intro h
+  rcases h with (⟨x, hpx⟩ | ⟨x, hqx⟩)
+  . refine ⟨x, ?_⟩
+    left
+    exact hpx
+  . refine ⟨x, ?_⟩
+    right
+    exact hqx
 
 theorem forall_conj_as_conj_forall :
   (∀ x, P x ∧ Q x) → (∀ x, P x) ∧ (∀ x, Q x)  := by
-  sorry
+  intro h
+  constructor
+  . intro x
+    exact (h x).left
+  . intro x
+    exact (h x).right
 
 theorem forall_conj_as_conj_forall_converse :
   (∀ x, P x) ∧ (∀ x, Q x) → (∀ x, P x ∧ Q x)  := by
-  sorry
+  intro h
+  intro x
+  constructor
+  . have hl := h.left
+    exact hl x
+  . have hr := h.right
+    exact hr x
 
 theorem forall_disj_as_disj_forall_converse :
   (∀ x, P x) ∨ (∀ x, Q x) → (∀ x, P x ∨ Q x)  := by
-  sorry
+  intro h
+  intro x
+  cases h with
+  | inl hup =>
+    left
+    exact hup x
+  | inr huq =>
+    right
+    exact huq x
 
 
 end predicate
